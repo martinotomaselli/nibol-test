@@ -1,14 +1,10 @@
-// src/app/page.tsx
-
-// Questa sarà la pagina di login (per ora solo un saluto)
-// Usiamo Tailwind CSS per lo stile
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold text-gray-700">
-        Benvenuto nel progetto Nibol!
-      </h1>
+    <main className="min-h-screen flex flex-col justify-center items-center bg-white text-center px-4">
+      <h1 className="text-3xl font-bold text-nibol.dark mb-2">Benvenuto su Nibol</h1>
+      <p className="text-gray-600 text-sm">
+        Questa è la homepage pubblica del test tecnico.
+      </p>
     </main>
-  )
+  );
 }

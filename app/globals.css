@@ -2,20 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Corpo base con stile Nibol */
 body {
-  color: var(--foreground);
-  background: var(--background);
+  background-color: white;
+  color: #2C2C2C;
   font-family: Arial, Helvetica, sans-serif;
 }
