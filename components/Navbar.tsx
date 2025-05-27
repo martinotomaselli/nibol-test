@@ -14,11 +14,10 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    // Rimuove il login e reindirizza
-    localStorage.removeItem('loggedIn');
-    setLoggedIn(false);
-    router.push('/');
-  };
+  localStorage.removeItem('loggedIn');
+  setLoggedIn(false); // aggiorna lo stato visivamente
+  router.push('/login'); // vai alla login
+};
 
   return (
     <nav className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
