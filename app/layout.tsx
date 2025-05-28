@@ -1,7 +1,8 @@
 import './globals.css';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Navbar from '@/components/Navbar';
+import { Metadata } from 'next';
+import ClientNavbarWrapper from '@/components/ClientNavbarWrapper';
+import { LoginProvider } from '@/components/LoginContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -10,16 +11,14 @@ export const metadata: Metadata = {
   description: 'App per prenotare spazi di lavoro',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" className={inter.variable}>
-      <body className="font-sans bg-white text-nibol.dark">
-        <Navbar />
-        {children}
+      <body className="font-sans bg-white text-nibol-dark">
+        <LoginProvider>
+          <ClientNavbarWrapper />
+          {children}
+        </LoginProvider>
       </body>
     </html>
   );

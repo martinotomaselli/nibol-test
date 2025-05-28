@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Corpo base con stile Nibol */
 body {
   background-color: white;

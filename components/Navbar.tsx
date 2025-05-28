@@ -1,39 +1,43 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useLogin } from './LoginContext';
 
 export default function Navbar() {
-  const router = useRouter();
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Controlla lo stato di login al caricamento
-    setLoggedIn(localStorage.getItem('loggedIn') === 'true');
-  }, []);
+  const { loggedIn, setLoggedIn } = useLogin();
 
   const handleLogout = () => {
-  localStorage.removeItem('loggedIn');
-  setLoggedIn(false); // aggiorna lo stato visivamente
-  router.push('/login'); // vai alla login
-};
+    localStorage.removeItem('loggedIn');
+    setLoggedIn(false);
+    window.location.href = '/';
+  };
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-      <span className="text-xl font-bold text-nibol.dark">Nibol</span>
-      <div className="flex items-center gap-6 text-sm font-medium">
-        <Link href="/" className="text-nibol.dark hover:text-nibol.orange transition">Home</Link>
+    <nav className="bg-white shadow-sm p-4 flex justify-between items-center">
+      <h1 className="text-xl font-bold">Nibol</h1>
+      <div className="space-x-4 text-sm">
+        <Link href="/" className="hover:underline">
+          Home
+        </Link>
 
-        {loggedIn ? (
-          // Se loggato: mostra solo Logout
-          <button onClick={handleLogout} className="text-nibol.orange hover:underline transition">Logout</button>
-        ) : (
-          // Se NON loggato: mostra Login e Registrati
+        {!loggedIn && (
           <>
-            <Link href="/login" className="text-nibol.dark hover:text-nibol.orange transition">Login</Link>
-            <Link href="/register" className="text-nibol.dark hover:text-nibol.orange transition">Registrati</Link>
+            <Link href="/login" className="hover:underline">
+              Login
+            </Link>
+            <Link href="/register" className="hover:underline">
+              Registrati
+            </Link>
           </>
+        )}
+
+        {loggedIn && (
+          <button
+            onClick={handleLogout}
+            className="text-red-600 hover:underline"
+          >
+            Logout
+          </button>
         )}
       </div>
     </nav>

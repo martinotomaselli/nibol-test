@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLogin } from '@/components/LoginContext';
 
 export default function LoginPage() {
   // Hook per gestire il routing
@@ -12,6 +13,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   // Funzione per gestire il submit del form
+  const { setLoggedIn } = useLogin();
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault(); // Previene il refresh della pagina
 
@@ -20,7 +22,8 @@ export default function LoginPage() {
 
     // Verifica che email e password corrispondano a quelle salvate
     if (email === savedUser.email && password === savedUser.password) {
-      localStorage.setItem("loggedIn", "true"); // Segnala che l'utente è loggato
+      localStorage.setItem("loggedIn", "true");
+       setLoggedIn(true);
       router.push("/dashboard"); // Reindirizza alla dashboard
     } else {
       alert("Credenziali non valide"); // Messaggio d’errore se non combaciano
