@@ -11,6 +11,8 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showRequirements, setShowRequirements] = useState(false);
+
 
   // Stato per checkbox dei termini
   const [agree, setAgree] = useState(false);
@@ -21,11 +23,9 @@ export default function RegisterPage() {
   // Controlla in tempo reale la forza della password
   useEffect(() => {
     const isStrong =
-      password.length >= 8 &&
-      /[A-Z]/.test(password) &&
-      /[0-9]/.test(password) &&
-      /[^A-Za-z0-9]/.test(password);
+       /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/.test(password);   
     setStrength(isStrong ? "strong" : "weak");
+    setShowRequirements(!isStrong && password.length > 0);
   }, [password]);
 
   // Funzione che gestisce il submit del form
@@ -130,6 +130,16 @@ export default function RegisterPage() {
               </p>
             </>
           )}
+
+          {/* Mostra i requisiti della password */}
+          {showRequirements && (
+            <div className="text-xs text-gray-500 mt-2">
+              <p>Password must be at least 8 characters long</p>
+              <p>Include at least one uppercase letter</p>
+              <p>Include at least one number</p>
+              <p>Include at least one special character</p>
+            </div>
+          )}  
 
           {/* Checkbox termini */}
           <div className="flex items-center text-sm text-gray-700 mt-2">

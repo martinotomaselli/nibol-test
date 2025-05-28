@@ -20,15 +20,21 @@ function useRedirectIfNotLogged() {
 export default function DashboardPage() {
   useRedirectIfNotLogged();
 
-  const [welcomeName] = useState('Martino Alfredo');
+const [welcomeName, setWelcomeName] = useState('');
+useEffect(() => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  setWelcomeName(user.name || '');
+}, []);
   const [status, setStatus] = useState<Status>('');
   const [desk, setDesk] = useState('');
   const [report, setReport] = useState<Record<string, Status>>({});
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
-  const handleStatusChange = (newStatus: Status) => {
+ 
+
+  function handleStatusChange(newStatus: Status) {
     setStatus(newStatus);
-  };
+  }
 
   const handleDeskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDesk(e.target.value);
